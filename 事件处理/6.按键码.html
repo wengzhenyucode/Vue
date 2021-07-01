@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- keyCode 的事件用法已经被废弃了并可能不会被最新的浏览器支持。 -->
+    <!-- 使用keyCode attribute 也是允许的 -->
+    <input v-on:keyup.13="submit">
+    <!-- 为了在必要的情况下支持旧浏览器，Vue提供了绝大多数常用的按键码的别名 -->
+    <!-- 
+        .enter
+        .tab
+        .delete (捕获“删除”和“退格”键)
+        .esc
+        .space
+        .up
+        .down
+        .left
+        .right 
+    -->
+    <!-- 你还可以通过全局 config.keyCodes 对象自定义按键修饰符别名： -->
+    <script>
+        Vue.config.keyCodes.f1=112
+    </script>
+
+    
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-Template</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <my-component></my-component>
+        <script type="text/x-template" id="my-component">
+            <div>
+               <ul>
+                   <li>北京万泰</li>
+                   <li>万泰凯瑞</li>
+                   <li>万泰沧海</li>
+                   <li>优迈科</li>
+               </ul>
+            </div>
+        </script>
+    </div>
+    <script>
+        Vue.component('my-component',{
+            template:"#my-component"
+        });
+        var app=new Vue({
+            el:"#app"
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>在v-for里使用对象</title>
+</head>
+<body>
+    <!-- 你也可以用 v-for 来遍历一个对象的 property。 -->
+    <ul id="v-for-object" class="demo">
+        <li v-for="(value,name) in object">
+            {{name}}:{{value}}
+        </li>
+    </ul>
+    <!-- 你也可以提供第二个的参数为 property 名称 (也就是键名)： -->
+    <div id="app">
+        <div v-for="(value,name) in object">
+            {{ name }}:{{ value }}
+        </div>
+    </div>
+    <!-- 还可以用第三个参数作为索引： -->
+    <div id="app2">
+        <div v-for="(value,name,index) in object">
+            {{index}}.{{ name }}:{{ value }}
+        </div>
+    </div>
+    <script>
+        var vm=new Vue({
+            el:"#v-for-object",
+            data:{
+                object:{
+                    title: 'How to do lists in Vue',
+                    author: 'Jane Doe',
+                    publishedAt: '2016-04-10'
+                }
+            }
+        });
+
+        var vm2=new Vue({
+            el:"#app",
+            data:{
+                object:{
+                    title: 'How to do lists in Vue',
+                    author: 'Jane Doe',
+                    publishedAt: '2016-04-10'
+                }
+            }
+        });
+
+        var vm3=new Vue({
+            el:"#app2",
+            data:{
+                object:{
+                    title: 'How to do lists in Vue',
+                    author: 'Jane Doe',
+                    publishedAt: '2016-04-10'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

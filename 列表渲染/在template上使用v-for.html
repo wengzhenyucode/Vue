@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在template上使用v-for</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 类似于 v-if，你也可以利用带有 v-for 的 <template> 来循环渲染一段包含多个元素的内容。比如： -->
+    <ul id="app">
+        <template v-for="item in items">
+            <li>{{item.msg}}</li>
+            <li class="divider" role="presentation"></li>
+        </template>
+    </ul>
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                items:[
+                    {msg:"1"},
+                    {msg:"2"},
+                    {msg:"3"},
+                ] 
+            }
+        })
+    </script>
+</body>
+</html>

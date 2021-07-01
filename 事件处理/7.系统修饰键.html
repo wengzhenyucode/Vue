@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统修饰键</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 可以用如下修饰符来实现仅在按下相应按键时才触发鼠标或键盘事件的监听器。 -->
+    <!-- 
+        .ctrl
+        .alt
+        .shift
+        .meta 
+    -->
+    <!-- Alt+C -->
+    <input v-on:keyup.alt.67="clear">
+    <div id="app">
+        <div v-on:click.ctrl="doSomething">Do something</div>
+    </div>
+
+    <!-- .exact修饰符 -->
+    <!-- .exact 修饰符允许你控制由精确的系统修饰符组合触发的事件。 -->
+
+    <!-- 即使 Alt 或 Shift 被一同按下时也会触发 -->
+    <button v-on:click.ctrl="onClick">A</button>
+
+    <!-- 有且只有 Ctrl 被按下的时候才触发 -->
+    <div id="app2">
+        <button v-on:click.ctrl.exact="onCtrlClick">A</button>
+    </div>
+   
+    <!-- 没有任何系统修饰符被按下的时候才触发 -->
+    <button v-on:click.exact="onClick">A</button>
+    <script>
+        var vm=new Vue({
+            el:'#app',
+            methods:{
+                doSomething:function(){
+                    alert("TEST");
+                }
+            }
+        })
+
+        var vm2=new Vue({
+            el:'#app2',
+            methods:{
+                onCtrlClick:function(){
+                    alert("TEST2");
+                }
+            }
+        })
+    </script>
+</body>
+</html>

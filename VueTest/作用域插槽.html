@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作用域插槽</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <my-list :books="books">
+            <template slot="book" scope="props">
+                <li>{{props.bookName}}</li>
+            </template>
+        </my-list>
+    </div>
+    <script>
+        Vue.component('my-list',{
+            props:{
+                books:{
+                    type:Array,
+                    default:function(){
+                        return [];
+                    }
+                }
+            },
+            template:'\
+            <ul>\
+                <slot name="book"\
+                v-for="book in books"\
+                :book-name="book.name">\
+                </slot>\
+            </ul>'
+        });
+
+        var app=new Vue({
+            el:"#app",
+            data:{
+                books:[
+                    {name:'《Vue.js实战》'},
+                    {name:'《JavaScript 语言精粹》'},
+                    {name:'《JavaScript 高级程序设计》'}
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

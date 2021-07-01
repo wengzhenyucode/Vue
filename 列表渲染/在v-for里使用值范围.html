@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在v-for里使用值范围</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- v-for 也可以接受整数。在这种情况下，它会把模板重复对应次数。 -->
+    <div id="app">
+        <span v-for="n in 10">{{ n }} </span>
+    </div>
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                
+            }
+        })
+    </script>
+</body>
+</html>

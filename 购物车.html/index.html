@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物车</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+<body>
+    <div id="app" v-cloak>
+        <template v-if="lists.length">
+             <table v-for="(item,index) in lists"> 
+                 <thead>
+                    <tr >
+                        <th><input type="checkbox" :checked="item.isCheckType" @click="handleSelectType(index)" /></th>
+                        <th colspan="5">{{item.type}}</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th>商品名称</th>
+                        <th>商品单价</th>
+                        <th>购买数量</th>
+                        <th>操作</th>
+                        <th>是否选中</th>
+                    </tr>
+                </thead> 
+                 <tbody>
+                    <tr v-for="(subitem,subindex) in item.list">
+                        <td>{{subindex+1}}</td>
+                        <td>{{subitem.name}}</td>
+                        <td>{{subitem.price}}</td>
+                         <td>
+                            <button @click="handleReduce(index,subindex)" :disabled="subitem.count===1">-</button>
+                            {{subitem.count}}
+                            <button @click="handleAdd(index,subindex)">+</button>
+                        </td>
+                        <td>
+                            <button @click="handleRemove(index,subindex)">移除</button>
+                        </td>
+                        <td>
+                            <input type="checkbox" @click="handleSelected(index,subindex)" :checked="subitem.checked">
+                        </td>
+                    </tr>
+                </tbody> 
+             </table>
+             <label for="">全选</label>
+            <input type="checkbox" @click="handleAllselected()" :checked="allchecked">
+            <div>总价：￥{{totalPrice}}</div>  
+        </template>
+         
+        <div v-else>购物车为空</div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据与方法</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{foo}}</p>
+        <!-- 这里的foo不会更新 -->
+        <button v-on:click="foo='baz'">Change it</button>
+    </div>
+    <div id="example">
+        {{a}}
+    </div>
+</body>
+<script>
+    //我们的数据对象
+    var data={a:1};
+    //该对象被加入到一个Vue实例中
+    var vm=new Vue({
+        data:data
+    });
+    var vm2=new Vue({
+        el:"#example",
+        data:data
+    })
+    //获得这个实例
+    console.log(vm.a==data.a);
+
+    vm.a=2;
+    console.log("data.a=%o",data.a);
+
+    data.a=3;
+    console.log("vm.a=%o",vm.a);
+
+    var obj={
+        foo:"bar"
+    }
+    //阻止修改现有的property，也意味着响应系统无法在追踪变化
+    Object.freeze(obj);
+
+    var app=new Vue({
+        el:"#app",
+        data:obj
+    });
+
+   
+    //除了数据property，Vue实例还暴露出了一些有用的实例方法property。它们都有前缀$，以便与用户定义的property区分开来。例如：
+    console.log(vm2.$data===data);
+
+    console.log(vm2.$el==document.getElementById("example"));
+    //$watch 是一个实例方法
+    vm2.$watch("a",function(newValue,oldValue){
+        //这个回调将在vm2.a改变后被调用
+        console.log(newValue-oldValue);
+    })
+
+    vm2.a=4;
+
+
+    
+</script>
+</html>

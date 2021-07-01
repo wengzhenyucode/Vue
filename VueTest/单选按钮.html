@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单选按钮</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="radio" v-model="picked" value="html" id="html">
+        <label for="html">HTML</label>
+        <br />
+        <input type="radio" v-model="picked" value="js" id="js">
+        <label for="js">JS</label>
+        <br />
+        <input type="radio" v-model="picked" value="css" id="css">
+        <label for="css">CSS</label>
+        <p>选择的项是:{{picked}}</p>
+    </div>
+    <script>
+        var app=new Vue({
+            el:"#app",
+            data:{
+                picked:'js'
+            }
+        })
+    </script>
+</body>
+</html>

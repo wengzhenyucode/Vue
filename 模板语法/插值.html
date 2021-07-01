@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <span id="app">Message:{{msg}}</span>
+    <!-- 通过使用 v-once 指令，你也能执行一次性地插值，当数据改变时，插值处的内容不会更新。但请留心这会影响到该节点上的其它数据绑定： -->
+    <span id="app-1" v-once>这个将不会改变:{{msg}}</span>
+    <p>Using mustaches:{{rawHtml}}</p>
+    <p>Using v-html directive:<span v-html="rawHtml"></span></p>
+    <!--Mustache 语法不能作用在 HTML attribute 上，遇到这种情况应该使用 v-bind 指令-->
+    <div v-bind:id="dynamicId"></div>
+    <button v-bind:disabled="isButtonDisabled">Button</button>
+</body>
+<script>
+    //文本
+    var app=new Vue({
+        el:"#app",
+        data:{
+            msg:"Hello Vue!"
+        }
+    });
+    var app1=new Vue({
+        el:"#app-1",
+        data:{
+            msg:"Hello Vue!"
+        }
+    })
+    //原始HTML
+    //双大括号会将数据解释为普通文本，而非 HTML 代码。为了输出真正的 HTML，你需要使用 v-html
+
+    //你的站点上动态渲染的任意 HTML 可能会非常危险，因为它很容易导致 XSS 攻击。请只对可信内容使用 HTML 插值，绝不要对用户提供的内容使用插值。
+    var app2=new Vue({
+        el:"p",
+        data:{
+            rawHtml:"<span style='color:red'>This should be red</span>"
+        }
+    })
+    
+    //Attribute
+    var app3=new Vue({
+        el:"button",
+        data:{
+            isButtonDisabled:"false"
+        }
+    })
+
+    //使用JavaScript表达式
+    //{{number+1}}
+    //{{ok?"YES":"No"}}
+    //{{message.split("").reverse().join("")}}
+    //<div v-bind:id="list-'+ id'"></div>
+    
+
+
+
+
+    //var rawHtml="<span style='color:red'>This should be red</span>"
+
+    //Attribute
+
+
+
+</script>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>显示过滤or排序后的结果</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 有时，我们想要显示一个数组经过过滤或排序后的版本，而不实际变更或重置原始数据。在这种情况下，可以创建一个计算属性，来返回过滤或排序后的数组。-->
+   <ul id="app">
+       <li v-for="n in evenNumbers">{{n}}</li>
+   </ul>
+   <!-- 在计算属性不适用的情况下 (例如，在嵌套 v-for 循环中) 你可以使用一个方法： -->
+   <div id="app2">
+        <ul v-for="set in sets">
+            <li v-for="n in even(set)">{{n}}</li>
+        </ul>
+   </div>
+  
+   <script>
+       var vm=new Vue({
+           el:"#app",
+           data:{
+               numbers:[1,2,3,4,5]
+           },
+           computed:{
+               evenNumbers:function(){
+                   return this.numbers.filter(function(number){
+                       return number % 2===0;
+                   })
+               }
+           }
+       });
+
+       var vm2=new Vue({
+           el:"#app2",
+           data:{
+               sets:[[1,2,3,4,5],[6,7,8,9,10]]
+           },
+           methods:{
+               even:function(numbers){
+                   return numbers.filter(function(number){
+                       return number %2 ===0;
+                   })
+               }
+           }
+       })
+   </script> 
+</body>
+</html>

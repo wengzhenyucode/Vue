@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Render slot</title>
+</head>
+<body>
+    <div id="app">
+        <ele></ele>
+        <ele>
+            <p>slot的内容</p>
+        </ele>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>   
+    <script>
+        Vue.component('ele',{
+            render:function(createElement){
+                if(this.$slots.default===undefined){
+                    return createElement('div','没有使用slot时显示的文本');
+                }else{
+                    return createElement('div',this.$slots.default); 
+                }
+            }
+        })
+
+        var app=new Vue({
+            el:"#app"
+        })
+    </script>
+
+</body>
+</html>

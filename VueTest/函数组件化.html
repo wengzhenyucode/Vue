@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数组件化</title>
+</head>
+<body>
+    <div id="app">
+        <smart-item :data="data"></smart-item>>
+        <button @click="change('img')">切换为图片组件</button>
+        <button @click="change('video')">切换为视频组件</button>
+        <button @click="change('text')">切换为文本组件</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var ImgItem={
+            props:['data'],
+            render:function(createElement){
+                return createElement('div',[
+                    createElement('p','图片组件'),
+                    createElement('img',{
+                        attrs:{
+                            src:this.data.url
+                        }
+                    })
+                ]);
+            }
+        };
+        var VideoItem={
+            props:['data'],
+            render:function(createElement){
+                return createElement('div',[
+                    createElement('p','视频组件'),
+                    createElement('video',{
+                        attrs:{
+                            src:this.data.url,
+                            controls:'controls',
+                            autoplay:'autoplay'
+                        }
+                    })
+                ]);
+            }
+        };
+
+        var TextItem={
+            props:['data'],
+            render:function(createElement){
+                return createElement('div',[
+                    createElement('p','纯文本文件'),
+                    createElement('P',this.data.content)
+                ]);
+            }
+        }
+
+        Vue.component('smart-item',{
+            functional:true,
+            props:{
+                data:{
+                    type:Object,
+                    required:true
+                }
+            },
+            render:function(createElement,context){
+                function getComponent(){
+                    var data=context.props.data;
+                    if(data.type==='img') return ImgItem;
+                    if(data.type==='video') return VideoItem;
+                    return TextItem;
+                }
+                return createElement(
+                    getComponent(),
+                    {
+                        props:{
+                            data:context.props.data
+                        }
+                    },
+                    // context.children
+                )
+            }
+        });
+
+        var app=new Vue({
+            el:"#app",
+            data:{
+                data:{}
+            },
+            methods:{
+                //切换不同类型组件的数据
+                change:function(type){
+                    if(type==='img'){
+                        this.data={
+                            type:'img',
+                            url:"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbos.pgzs.com%2Frbpiczy%2FWallpaper%2F2011%2F5%2F5%2F1fb6d7bc4d2949c0b3ad0a5f55210958-14.jpg&refer=http%3A%2F%2Fbos.pgzs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1625299621&t=075258bb9c2d48695b701ce5c71fedcc"
+                        }
+                    } else if(type==='video'){
+                        this.data={
+                            type:'video',
+                            url:""
+                        }
+                    } else if(type==='text'){
+                        this.data={
+                            type:'text',
+                            content:'这是一段纯文本'
+                        }
+                    }
+                }
+
+            },
+            created:function(){
+                this.change('img');
+            }
+        })
+    </script>
+</body>
+</html>

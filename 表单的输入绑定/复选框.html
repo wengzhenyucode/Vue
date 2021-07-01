@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>复选框</title>
+</head>
+<body>
+    <!-- 单个复选框，绑定到布尔值： -->
+    <div id="app">
+        <input type="checkbox" id="checkbox" v-model="checked">
+        <label for="checkbox">{{ checked }}</label>
+    </div>
+    <div id="app2">
+        <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+        <label for="jack">Jack</label>
+        <input type="checkbox" id="join" value="John" v-model="checkedNames">
+        <label for="john">John</label>
+        <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+        <label for="mike">Mike</label>
+        <br>
+        <span>Checkednames:{{ checkedNames }}</span>
+    </div>
+   <script>
+       var vm=new Vue({
+        el:'#app',
+        data:{
+            checked:'true'
+        }
+       })
+       var vm2=new Vue({
+           el:"#app2",
+           data:{
+            checkedNames:[]
+           }
+       })
+   </script>
+</body>
+</html>

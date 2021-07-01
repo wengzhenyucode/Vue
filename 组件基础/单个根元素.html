@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单个根元素</title>
+</head>
+<body>
+    <!-- 
+        当构建一个<blog-post>组件时，你的模板最终会包含的东西远不止一个标题：<h3>{{title}}</h3>
+        最起码，你会包含这篇博文的正文：
+        <h3>{{ title }}</h3>
+        <div v-html="content"></div>
+        然而如果你在模板中尝试这样写，Vue 会显示一个错误，并解释道 every component must have a single root element 
+        (每个组件必须只有一个根元素)。你可以将模板的内容包裹在一个父元素内，来修复这个问题，例如：
+     -->
+     <div class="blog-post">
+         <h3>{{title}}</h3>
+         <div v-html="content"></div>
+     </div>
+     <!-- 看起来当组件变得越来越复杂的时候，我们的博文不只需要标题和内容，还需要发布日期、评论等等。为每个相关的信息定义一个 prop 会变得很麻烦： -->
+     <blog-post
+        v-for="post in posts"
+        v-bind:key="post.id"
+        v-bind:title="post.title"
+        v-bind:content="post.content"
+        v-bind:publishedAt="post.publishedAt"
+        v-bind:comments="post.comments">
+    </blog-post>
+    <!-- 所以是时候重构一下这个 <blog-post> 组件了，让它变成接受一个单独的 post prop： -->
+    <blog-post v-for="post in posts" v-bind:key="post.id" v-bind:post="post">
+        
+    </blog-post>
+    <script>
+        /*现在，不论何时为 post 对象添加一个新的 property，它都会自动地在 <blog-post> 内可用。*/
+        Vue.component("blog-post",{
+            props:['post'],
+            template:
+                `<div class="blog-post">
+                    <h3>{{post.title}}</h3>
+                    <div v-html="post.content"></div>
+                </div>
+                `
+        })
+    </script>
+    
+</body>
+</html>

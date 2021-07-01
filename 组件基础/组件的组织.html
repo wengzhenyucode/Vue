@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件的组织</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 通常一个应用会以一棵嵌套的组件树的形式来组织:-->
+    <!-- 例如，你可能会有页头、侧边栏、内容区等组件，每个组件又包含了其他的像导航链接、博文之类的组件 -->
+    <!-- 为了能在模板中使用，这些组件必须先注册以便识别。这里有两种组件的注册类型：全局祖册和局部注册 -->
+    <!-- 全局注册的组件可以用在其被注册之后的任何 (通过 new Vue) 新创建的 Vue 根实例，也包括其组件树中的所有子组件的模板中。 -->
+    <!-- 
+        Prop 是你可以在组织上注册一些自定义attribute。当一个值传递给一个prop attribute 的时候，它就变成了那个组件实例的一个property
+    -->
+    <div id="prop">
+        <blog-post title="My journey with Vue"></blog-post>
+        <blog-post title="Blogging with Vue"></blog-post>
+        <blog-post title="Why Vue is so fun"></blog-post>
+    </div>
+    <div id="blog-post-demo">
+        <blog-post v-for="post in posts" v-bind:key="post.id" v-bind:title="post.title"></blog-post>
+    </div>
+    <script>
+        Vue.component('blog-post',{
+            props:['title'],
+            template:'<h3>{{title}}</h3>'
+        })
+      
+        var vm=new Vue({
+            el:"#prop",
+            data:{
+
+            }
+        })
+
+        var vm2=new Vue({
+            el:"#blog-post-demo",
+            data:{
+                posts:[
+                    {id:1,title:'My journey with Vue'},
+                    {id:2,title:'Blogging with Vue'},
+                    {id:3,title:'Why Vue is so fun'}
+                ]
+            },
+         
+        })
+        
+    </script>
+
+</body>
+</html>
